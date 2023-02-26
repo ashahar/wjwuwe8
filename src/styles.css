@@ -92,12 +92,15 @@ body {
 }
 
 .answer {
-  margin-top: 10px;
-  font-size: 16px;
+  font-size: 18px;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
 }
 
-.game-info {
-  margin-left: 20px;
+.game-info ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 input, textarea {

@@ -32,10 +32,9 @@ function Question({value, answer, onChange, onClick}) {
 
 function Answer({value}) {
   const ops = ["+", "-", 'x', "/"]
-  const result = value.answer ? value.result + ' ✔' : value.result
   return (
     <div className="answer">
-      {value.num1} {ops[value.operator]} {value.num2} = {result}      
+      {value.num1} {ops[value.operator]} {value.num2} = {value.result} {value.answer ? '✔' : ''}
     </div>
   );
 }
@@ -46,7 +45,7 @@ export default function Game() {
   const [history, setHistory] = useState([]);
 
   function handleNext() {
-    let question = genQuestion();
+    let question = getRandomQuestion();
     setHistory([...history, question]);
     setMessage("");
     setAnswer("");
@@ -74,7 +73,7 @@ export default function Game() {
   };
 
   if (history.length === 0) {
-    setHistory([genQuestion()]);
+    setHistory([getRandomQuestion()]);
   }
 
   const questions = history.slice(0,-1).map((question, index) => {
@@ -99,7 +98,7 @@ export default function Game() {
         {message}
       </div>
       <div className="game-info">
-        <ul>{questions}</ul>
+        <ol>{questions}</ol>
       </div>
       <button onClick={() => handleNext()}>&raquo;</button>
     </>
@@ -110,29 +109,28 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-function genQuestion()
+function getRandomQuestion()
 {
   let result = null;
   let num1 = getRandomInt(10, 100);
-  let num2 = getRandomInt(2, 10);
+  let num2 = getRandomInt(10, 100);
   let op = getRandomInt(0, 4);
 
   if ( op===0 ) {
-    num2 = getRandomInt(10, 100);
     result = num1 + num2;
   } else if ( op===1 ) {
-    num2 = getRandomInt(10, 100);
-    if (num1 < num2) {
-      let x = num1;
-      num1 = num2;
-      num2 = x;
+    while (num1 <= num2 + 10) {
+      num1 = getRandomInt(10, 100);
+      num2 = getRandomInt(10, 100);
     }
     result = num1 - num2;
   } else if ( op===2 ) {
+    num2 = getRandomInt(4, 10);
     result = num1 * num2;
   } else {
+    num2 = getRandomInt(4, 10);
     while (num1 % num2 !== 0) {
-      num1 = getRandomInt(10, 100);      
+      num1 = getRandomInt(10, 100);
     }
     result = num1 / num2;
   } 
