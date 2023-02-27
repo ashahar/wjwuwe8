@@ -27,7 +27,7 @@ export default function Home() {
     const [questions, setQuestions] = useState([]);
   
     function handleNext() {
-      let next = Array.from({length: 10}, 
+      let next = Array.from({length: 15}, 
         () => (getRandomQuestion()))
       setQuestions([...next]);
     }
@@ -62,7 +62,9 @@ export default function Home() {
         <div className="question-info">
           <ol>{questionList}</ol>
         </div>
-        <button className="no-print" onClick={() => handleNext()}>Next &raquo;</button>
+        <div className="no-print">
+          <button onClick={() => handleNext()}>Next &raquo;</button>
+        </div>
       </>
     );
   }
