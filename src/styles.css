@@ -81,23 +81,20 @@ body {
   margin-bottom: 10px;
 }
 
-.game {
+.main {
   display: flex;
   flex-direction: row;
+  margin: 10px;
 }
 
 .question {
-  margin-top: 20px;
-  font-size: 20px;
-}
-
-.answer {
-  font-size: 18px;
-  border-bottom: 1px solid #ddd;
+  flex-basis: 50%;
   padding: 10px;
+  font-size: 20px;
+  border-bottom: 1px solid #ddd;
 }
 
-.game-info ul {
+.question-info ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -109,11 +106,9 @@ input, textarea {
 }
 
 input[type=text] {
-  margin-top: 10px;
   padding: 10px;
   border: 1px solid #ccc;
   outline: none;
-  border-radius:10px;
 }
 
 input[type=text]:focus {
