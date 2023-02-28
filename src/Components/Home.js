@@ -1,21 +1,24 @@
 import { useState } from 'react';
+import { useId } from 'react';
   
 function Question({value, index, handleChange}) {
+    const answerId = useId();
     const ops = ["+", "-", 'x', "/"]
     const styles = {
         answer : {
-            backgroundColor: "#ddd",
-            display: value.answer ? "none" : ""
+            backgroundColor: value.answer ? "#fff" : "#ddd"
         }
     }
 
     return (
       <div className="main">
         <div  className="question">
-            {value.num1} {ops[value.operator]} {value.num2} = {value.answer ? value.result : ''}
+            {value.num1} {ops[value.operator]} {value.num2} = 
         </div>
         <input className="no-print" style={styles.answer}
-            autoComplete="off" type="text" id="answer" name="answer" maxLength="4" size="4"
+            autoComplete="off" type="text" 
+            id={answerId} 
+            name={"answer_" + index} maxLength="4" size="4"
             value={value.text}
             onChange={(event)=>handleChange(index, event)}
           />
